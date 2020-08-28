@@ -73,6 +73,6 @@ if __name__ == '__main__':
     
     # Write results to file, using a timestamp to keep unique filename between
     # connsecutive script execution
-    timestamp = datetime.now().isoformat()
-    write_to_file(pingable_nodes, FILE_PINGABLE.format(timestamp))
-    write_to_file(non_pingable_nodes, FILE_NOT_PINGABLE.format(timestamp))
+    timestamp = datetime.now().isoformat().replace(':', '')
+    write_to_file(pingable_nodes, FILE_PINGABLE.format(timestamp) + '.txt')
+    write_to_file(non_pingable_nodes, FILE_NOT_PINGABLE.format(timestamp) + '.txt')
