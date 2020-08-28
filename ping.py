@@ -13,8 +13,8 @@ def write_to_file(node_list, filename):
             filehandler.write(node)
             filehandler.write('\n')
 
-def write_to_screen(node_list, title='RESULTS'):
-    print('PINGABLE NODES:')
+def write_to_screen(node_list, title='RESULTS:'):
+    print(title)
     print('=' * 16)
     
     for node in node_list:
