@@ -1,10 +1,15 @@
 import subprocess
 from datetime import datetime
+from platform import system
 
-INPUT_FILE = "nodes.txt"
+INPUT_FILE = 'nodes.txt'
 FILE_NOT_PINGABLE = 'non_pingable_{}'
 FILE_PINGABLE = 'pingable_{}'
 
+# Assume *nix or OSX but if its windows, use -n ping option.
+ping_cmd = ['ping', '-c', '1']
+if system() == 'Windows':
+    ping_cmd = ['ping', '-n', '1']
 
 def write_to_file(node_list, filename):
 
@@ -27,7 +32,7 @@ def is_pingable(host, timeout=50):
     #  All other values were not pingable
     try:
         result = subprocess.call(
-            ["ping", "-c", "1", host],
+            [*ping_cmd, host],
             stdout=subprocess.DEVNULL,
             stderr=subprocess.DEVNULL,
             timeout=timeout
@@ -45,7 +50,7 @@ def is_pingable(host, timeout=50):
     
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
 
     # build list of nodes
     with open(INPUT_FILE) as filehandler:
